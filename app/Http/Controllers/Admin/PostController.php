@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -29,7 +30,9 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view("admin.posts.create");
+        $categories = Category::all();
+
+        return view("admin.posts.create", compact("categories"));
     }
 
     /**
@@ -43,7 +46,8 @@ class PostController extends Controller
         //
         $request->validate([
             "title" => "required|max:255",
-            "content" => "required"
+            "content" => "required",
+            "category_id" => "required"
         ]);
 
         $data = $request->all();
@@ -76,7 +80,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
-        return view("admin.posts.edit",compact("post"));
+        $categories = Category::all();
+        return view("admin.posts.edit",compact("post","categories"));
     }
 
     /**

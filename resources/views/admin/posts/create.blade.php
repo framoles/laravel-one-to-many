@@ -11,6 +11,12 @@
         @csrf
         Title<input name="title" type="text">
         Content<input name="content" type="text">
+        <select name="category_id">
+            <option value="">Select Category</option>
+            @foreach ($categories as $categ)
+                <option value="{{ $categ->id }}">{{ $categ->name }}</option>
+            @endforeach
+        </select>
         <button type="submit">Submit</button>
     </form>
 @endsection
